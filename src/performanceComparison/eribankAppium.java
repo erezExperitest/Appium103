@@ -2,6 +2,7 @@ package performanceComparison;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
@@ -66,29 +67,32 @@ public class eribankAppium {
 
     @Test
     public void test() {
-//		System.out.println(driver.getPageSource());
-        long startTime = System.currentTimeMillis();
+        ArrayList<Long> iterationsTimeList = new ArrayList<Long>();
         int i;
         for (i=0;i<10;i++) {
+            long iteratioStartTime = System.currentTimeMillis();
+            driver.launchApp();
             driver.findElement(By.name("usernameTextField")).clear();
             driver.findElement(By.name("usernameTextField")).sendKeys("company");
-            driver.findElement(By.name("usernameTextField")).clear();
-            driver.findElement(By.name("usernameTextField")).sendKeys("company");
-//            driver.findElement(By.name("passwordTextField")).clear();
-//            driver.findElement(By.name("passwordTextField")).sendKeys("company");
-//            driver.findElement(By.name("loginButton")).click();
-//            driver.findElement(By.name("makePaymentButton")).click();
-//            driver.findElement(By.name("countryButton")).click();
-//            driver.findElement(By.name("Colombia")).click();
-//            driver.findElement(By.name("cancelButton")).click();
-//            driver.findElement(By.name("logoutButton")).click();
-//        System.out.println(driver.getPageSource());
+            driver.findElement(By.name("passwordTextField")).clear();
+            driver.findElement(By.name("passwordTextField")).sendKeys("company");
+            driver.findElement(By.name("loginButton")).click();
+            driver.findElement(By.name("makePaymentButton")).click();
+            driver.findElement(By.name("countryButton")).click();
+            driver.findElement(By.name("Colombia")).click();
+            driver.findElement(By.name("cancelButton")).click();
+            driver.findElement(By.name("logoutButton")).click();
+            driver.closeApp();
+            long iteratioEndTime = System.currentTimeMillis();
+            long iteratioTime = iteratioEndTime - iteratioStartTime;
+            System.out.println("Iteration took: " + iteratioTime / 1000 + " seconds");
+            iterationsTimeList.add(iteratioTime);
         }
-        long tottalTime = (System.currentTimeMillis()-startTime)/1000;
+        long totalrunningTime = iterationsTimeList.stream().mapToLong(Long::longValue).sum() / 1000;
         System.out.println("----------------------------------------------------------------------------------");
         System.out.println(this.getClass().getName());
-        System.out.println(i +" itarations took "+ tottalTime + " seconds");
-        System.out.println("avarage time per iteration was: " + (tottalTime/i));
+        System.out.println(i + " itarations took " + totalrunningTime + " seconds");
+        System.out.println("avarage time per iteration was: " + (totalrunningTime / i) + " seconds");
         System.out.println("----------------------------------------------------------------------------------");
 
     }
