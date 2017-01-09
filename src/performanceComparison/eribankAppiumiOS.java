@@ -26,7 +26,7 @@ import org.openqa.selenium.By;
 import java.net.URL;
 import java.net.MalformedURLException;
 
-public class eribankAppium {
+public class eribankAppiumiOS {
 
     private String host = "localhost";
     private int port = 8889;

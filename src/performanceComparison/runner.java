@@ -8,7 +8,11 @@ import org.junit.runner.JUnitCore;
 public class runner {
 
     public static void main(String[] args){
-        JUnitCore.runClasses(regularSeeTestAndroid.class);
-        JUnitCore.runClasses(PerformanceSTAAppiumAndroid.class);
+        long startTime = System.currentTimeMillis();
+        do {
+            JUnitCore.runClasses(regularSeeTestAndroid.class);
+            JUnitCore.runClasses(AndroidCrome.class);
+
+        }while (((((System.currentTimeMillis()-startTime)/1000)/60)/60)<6);
     }
 }
