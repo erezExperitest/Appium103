@@ -26,7 +26,7 @@ public class eribankAppiumiOS {
     private String testName = "2";
     protected SeeTestIOSDriver<SeeTestIOSElement> driver = null;
 
-//    private AppiumDriver driver;
+    //    private AppiumDriver driver;
     @Before
     public void setUp() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();

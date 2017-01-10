@@ -57,16 +57,16 @@ public class SafariSTA {
         int i;
         for (i=0;i<10;i++) {
             long iterationStartTime = System.currentTimeMillis();
-        driver.context("WEBVIEW");
-        driver.findElement(By.id("searchInput")).sendKeys("jerusalem");
-        if (driver.getClient().waitForElement("WEB", "text=Jerusalem", 0, 10000)) {
-            // If statement
-        }
-        driver.findElement(By.linkText("Jerusalem")).click();
-        if (driver.getClient().waitForElement("WEB", "text=UNESCO World Heritage Site", 0, 30000)) {
-            // If statement
-        }
-        driver.findElement(By.linkText("UNESCO World Heritage Site")).click();
+            driver.context("WEBVIEW");
+            driver.findElement(By.id("searchInput")).sendKeys("jerusalem");
+            if (driver.getClient().waitForElement("WEB", "text=Jerusalem", 0, 10000)) {
+                // If statement
+            }
+            driver.findElement(By.linkText("Jerusalem")).click();
+            if (driver.getClient().waitForElement("WEB", "text=UNESCO World Heritage Site", 0, 30000)) {
+                // If statement
+            }
+            driver.findElement(By.linkText("UNESCO World Heritage Site")).click();
             long iterationEndTime = System.currentTimeMillis();
             long iterationTime = iterationEndTime - iterationStartTime;
             System.out.println("Iteration No. " + i + " took: " + iterationTime / 1000 + " seconds");
@@ -87,26 +87,26 @@ public class SafariSTA {
         int i;
         for (i=0;i<10;i++) {
             long iterationStartTime = System.currentTimeMillis();
-        driver.context("WEBVIEW_1");
-        driver.get("http://www.google.com");
-        driver.findElement(By.id("lst-ib")).click();
-        driver.findElement(By.id("lst-ib")).sendKeys("experitest");
-        driver.findElement(By.xpath("//*[@nodeName='DIV' and @width>0 and ./parent::*[@id='tsbb']]")).click();
+            driver.context("WEBVIEW_1");
+            driver.get("http://www.google.com");
+            driver.findElement(By.id("lst-ib")).click();
+            driver.findElement(By.id("lst-ib")).sendKeys("experitest");
+            driver.findElement(By.xpath("//*[@nodeName='DIV' and @width>0 and ./parent::*[@id='tsbb']]")).click();
 //        driver.findElement(By.id("lst-ib")).sendKeys(Keys.RETURN);
 //        driver.getClient().sendText("{ENTER}");
 
-        if (driver.getClient().waitForElement("WEB", "text=תמונות", 0, 30000)) {
-            // If statement
-            driver.findElement(By.linkText("תמונות")).click();
-        }
+            if (driver.getClient().waitForElement("WEB", "text=תמונות", 0, 30000)) {
+                // If statement
+                driver.findElement(By.linkText("תמונות")).click();
+            }
 //        if (driver.getClient().waitForElement("WEB", "//*[@nodeName='A' and ./*[@name='1tqX0q1YsulfuM:']]", 0, 30000))
 //            driver.findElement(By.xpath("//*[@nodeName='A' and ./*[@name='1tqX0q1YsulfuM:']]")).click();
-        long iterationEndTime = System.currentTimeMillis();
-        long iterationTime = iterationEndTime - iterationStartTime;
-        System.out.println("Iteration No. " + i + " took: " + iterationTime / 1000 + " seconds");
-        iterationsTimeList.add(iterationTime);
-    }
-    long totalrunningTime = iterationsTimeList.stream().mapToLong(Long::longValue).sum() / 1000;
+            long iterationEndTime = System.currentTimeMillis();
+            long iterationTime = iterationEndTime - iterationStartTime;
+            System.out.println("Iteration No. " + i + " took: " + iterationTime / 1000 + " seconds");
+            iterationsTimeList.add(iterationTime);
+        }
+        long totalrunningTime = iterationsTimeList.stream().mapToLong(Long::longValue).sum() / 1000;
         System.out.println("----------------------------------------------------------------------------------");
         System.out.println(this.getClass().getName());
         System.out.println(i + " itarations took " + totalrunningTime + " seconds");
