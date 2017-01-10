@@ -1,30 +1,20 @@
-package performanceComparison;
+package ios;
 
-import java.io.File;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.experitest.appium.SeeTestCapabilityType;
+import com.experitest.appium.SeeTestIOSDriver;
+import com.experitest.appium.SeeTestIOSElement;
+import io.appium.java_client.remote.MobileCapabilityType;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.ios.IOSDriver;
-
-import com.experitest.appium.*;
-import io.appium.java_client.remote.IOSMobileCapabilityType;
-import io.appium.java_client.remote.MobileCapabilityType;
-import org.junit.*;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.By;
-import java.net.URL;
 import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 
 public class eribankAppiumiOS {
 
@@ -40,18 +30,6 @@ public class eribankAppiumiOS {
     @Before
     public void setUp() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-//        capabilities.setCapability("app", "/Applications/STA/SeeTest-Trunk/bin/ipas/EriBankO.ipa");
-//        capabilities.setCapability("platformName", "IOS");
-//        capabilities.setCapability("udid", "36f0a41a8fca9263c1f977b915dcb5668a0b83fc");
-//        capabilities.setCapability("deviceName", "Ipad");
-//        capabilities.setCapability("bundleId", "com.experitest.ExperiBankO");
-//        capabilities.setCapability("noReset", true);
-//        capabilities.setCapability("noReset", true);
-//        capabilities.setCapability("automationName","XCUITest");
-//        capabilities.setCapability("xcodeConfigFile", "/Users/erez.akri/Documents/untitled folder/appium-xcuitest--driver-master"
-//                + "/WebDriverAgent/Config.xcconfig");
-//        capabilities.setCapability("realDeviceLogger", "/usr/local/lib/node_modules/deviceconsole");
-//        driver = new IOSDriver(new URL("http://0.0.0.0:4723/wd/hub"), (Capabilities)capabilities);
         capabilities.setCapability(SeeTestCapabilityType.PROJECT_BASE_DIRECTORY, projectBaseDirectory);
         capabilities.setCapability(SeeTestCapabilityType.REPORT_DIRECTORY, reportDirectory);
         capabilities.setCapability(SeeTestCapabilityType.REPORT_FORMAT, reportFormat);
@@ -65,12 +43,12 @@ public class eribankAppiumiOS {
 
     }
 
-    @Test
+    @Ignore
     public void test() {
-        ArrayList<Long> iterationsTimeList = new ArrayList<Long>();
+        ArrayList<Long> iterationsTimeList = new ArrayList<>();
         int i;
         for (i=0;i<10;i++) {
-            long iteratioStartTime = System.currentTimeMillis();
+            long iterationStartTime = System.currentTimeMillis();
             driver.launchApp();
             driver.findElement(By.name("usernameTextField")).clear();
             driver.findElement(By.name("usernameTextField")).sendKeys("company");
@@ -79,14 +57,16 @@ public class eribankAppiumiOS {
             driver.findElement(By.name("loginButton")).click();
             driver.findElement(By.name("makePaymentButton")).click();
             driver.findElement(By.name("countryButton")).click();
-            driver.findElement(By.name("Colombia")).click();
+            swipeDown();
+            swipeDown();
+            driver.findElement(By.name("Mexico")).click();
             driver.findElement(By.name("cancelButton")).click();
             driver.findElement(By.name("logoutButton")).click();
             driver.closeApp();
-            long iteratioEndTime = System.currentTimeMillis();
-            long iteratioTime = iteratioEndTime - iteratioStartTime;
-            System.out.println("Iteration took: " + iteratioTime / 1000 + " seconds");
-            iterationsTimeList.add(iteratioTime);
+            long iterationEndTime = System.currentTimeMillis();
+            long iterationTime = iterationEndTime - iterationStartTime;
+            System.out.println("Iteration No. " + i + " took: " + iterationTime / 1000 + " seconds");
+            iterationsTimeList.add(iterationTime);
         }
         long totalrunningTime = iterationsTimeList.stream().mapToLong(Long::longValue).sum() / 1000;
         System.out.println("----------------------------------------------------------------------------------");
@@ -97,11 +77,35 @@ public class eribankAppiumiOS {
 
     }
 
+
+
     @After
     public void tearDown() {
         driver.quit();
     }
 
+    void swipeDown(){
+        //Get the size of screen.
+        Dimension size = driver.manage().window().getSize();
+//        System.out.println(size);
 
+        //Find swipe start and end point from screen's with and height.
+        //Find starty point which is at bottom side of screen.
+        int starty = (int) (size.height * 0.70);
+        //Find endy point which is at top side of screen.
+        int endy = (int) (size.height * 0.30);
+        //Find horizontal point where you wants to swipe. It is in middle of screen width.
+        int startx = size.width / 2;
+//        System.out.println("starty = " + starty + " ,endy = " + endy + " , startx = " + startx);
+
+        //Swipe from Bottom to Top.
+        driver.swipe(startx, starty, startx, endy, 3000);
+
+        try {
+            Thread. sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

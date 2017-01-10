@@ -1,18 +1,21 @@
-package performanceComparison; /**
+package Android; /**
  * Created by erez.akri on 05-Jan-17.
  */
 //package <set your test package>;
-import com.experitest.appium.*;
+import com.experitest.appium.SeeTestAndroidDriver;
+import com.experitest.appium.SeeTestAndroidElement;
+import com.experitest.appium.SeeTestCapabilityType;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.By;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.net.URL;
 import java.net.MalformedURLException;
+import java.net.URL;
 
 public class PerformanceSTAAppiumAndroid {
     private String host = "localhost";
@@ -51,8 +54,6 @@ public class PerformanceSTAAppiumAndroid {
             driver.findElement(By.xpath("//*[@text='Login']")).click();
             driver.findElement(By.xpath("//*[@text='Make Payment']")).click();
             driver.findElement(By.xpath("//*[@id='countryButton']")).click();
-//            driver.launchApp();
-//            driver.findElement(By.name("Colombia")).click();
             swipeDown();
             swipeDown();
             driver.findElement(By.xpath("//*[@text='Colombia']")).click();
@@ -60,24 +61,14 @@ public class PerformanceSTAAppiumAndroid {
             driver.findElement(By.xpath("//*[@text='Logout']")).click();
 
         }
-//            driver.findElement(By.xpath("//*[@id='usernameTextField']")).sendKeys("company");
-//            driver.findElement(By.xpath("//*[@id='passwordTextField']")).sendKeys("company");
-//            driver.findElement(By.xpath("//*[@id='usernameTextField']")).clear();
-//            driver.findElement(By.linkText("Login")).click();
-//            driver.findElement(By.linkText("Make Payment")).click();
-//            driver.findElement(By.linkText("Select")).click();
-//            driver.getClient().elementListSelect("", "text=Mexico", 0, false);
-//            driver.findElement(By.linkText("Mexico")).click();
-//            driver.findElement(By.linkText("Cancel")).click();
-//            driver.findElement(By.linkText("Logout")).click();
-//        }
-//        long tottalTime = (System.currentTimeMillis()-startTime)/1000;
-//        System.out.println("----------------------------------------------------------------------------------");
-//        System.out.println(this.getClass().getName());
-//        System.out.println(i +" itarations took "+ tottalTime + " seconds");
-//        System.out.println("avarage time per iteration was: " + (tottalTime/i));
-//        System.out.println("----------------------------------------------------------------------------------");
+        long tottalTime = (System.currentTimeMillis()-startTime)/1000;
+        System.out.println("----------------------------------------------------------------------------------");
+        System.out.println(this.getClass().getName());
+        System.out.println(i +" itarations took "+ tottalTime + " seconds");
+        System.out.println("avarage time per iteration was: " + (tottalTime/i));
+        System.out.println("----------------------------------------------------------------------------------");
     }
+
 
     @After
     public void tearDown() {

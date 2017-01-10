@@ -1,4 +1,4 @@
-package performanceComparison; /**
+package Android; /**
  * Created by erez.akri on 05-Jan-17.
  */
 //package <set your test package>;

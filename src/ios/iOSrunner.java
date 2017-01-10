@@ -1,17 +1,19 @@
-package performanceComparison;
+package ios;
 
+import Android.AndroidCrome;
+import Android.regularSeeTestAndroid;
 import org.junit.runner.JUnitCore;
 
 /**
  * Created by erez.akri on 05-Jan-17.
  */
-public class runner {
+public class iOSrunner {
 
     public static void main(String[] args){
         long startTime = System.currentTimeMillis();
         do {
-            JUnitCore.runClasses(regularSeeTestAndroid.class);
-            JUnitCore.runClasses(AndroidCrome.class);
+            JUnitCore.runClasses(eribankAppiumiOS.class);
+            JUnitCore.runClasses(SafariSTA.class);
 
         }while (((((System.currentTimeMillis()-startTime)/1000)/60)/60)<6);
     }
