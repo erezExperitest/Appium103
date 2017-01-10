@@ -6,6 +6,7 @@ import com.experitest.appium.*;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.junit.*;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -45,13 +46,15 @@ public class PerformanceSTAAppiumAndroid {
         long startTime = System.currentTimeMillis();
         int i;
         for (i=0;i<1;i++) {
-            driver.findElement(By.xpath("//*[@class='android.widget.LinearLayout' and ./*[@id='usernameTextField']]")).sendKeys("company");
-            driver.findElement(By.xpath("//*[@class='android.widget.LinearLayout' and ./*[@id='passwordTextField']]")).sendKeys("company");
+            driver.findElement(By.xpath("//*[@id='usernameTextField']")).sendKeys("company");
+            driver.findElement(By.xpath("//*[@id='passwordTextField']")).sendKeys("company");
             driver.findElement(By.xpath("//*[@text='Login']")).click();
             driver.findElement(By.xpath("//*[@text='Make Payment']")).click();
             driver.findElement(By.xpath("//*[@id='countryButton']")).click();
-            driver.launchApp();
-            driver.findElement(By.name("Colombia")).click();
+//            driver.launchApp();
+//            driver.findElement(By.name("Colombia")).click();
+            swipeDown();
+            swipeDown();
             driver.findElement(By.xpath("//*[@text='Colombia']")).click();
             driver.findElement(By.xpath("//*[@text='Cancel']")).click();
             driver.findElement(By.xpath("//*[@text='Logout']")).click();
@@ -79,5 +82,29 @@ public class PerformanceSTAAppiumAndroid {
     @After
     public void tearDown() {
         driver.quit();
+    }
+
+    void swipeDown(){
+        //Get the size of screen.
+        Dimension size = driver.manage().window().getSize();
+//        System.out.println(size);
+
+        //Find swipe start and end point from screen's with and height.
+        //Find starty point which is at bottom side of screen.
+        int starty = (int) (size.height * 0.70);
+        //Find endy point which is at top side of screen.
+        int endy = (int) (size.height * 0.30);
+        //Find horizontal point where you wants to swipe. It is in middle of screen width.
+        int startx = size.width / 2;
+//        System.out.println("starty = " + starty + " ,endy = " + endy + " , startx = " + startx);
+
+        //Swipe from Bottom to Top.
+        driver.swipe(startx, starty, startx, endy, 3000);
+
+        try {
+            Thread. sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
