@@ -14,7 +14,8 @@ public class iOSrunner {
         do {
             JUnitCore.runClasses(eribankAppiumiOS.class);
             JUnitCore.runClasses(SafariSTA.class);
-
+            float testTime = ((((System.currentTimeMillis()-startTime)/1000)/60)/60);
+            System.out.println(testTime);
         }while (((((System.currentTimeMillis()-startTime)/1000)/60)/60)<6);
     }
 }
